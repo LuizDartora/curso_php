@@ -19,6 +19,7 @@
     $produtoNome;
     $precoCompra;
     $precoVenda;
+    $lucro;
     $repete = TRUE;
 
     $array = array(
@@ -26,6 +27,12 @@
         "compra" => array(),
         "venda" => array(),
         "lucro" => array()
+    );
+
+    $lucroCont = array(
+        "baixo" => array(),
+        "medio" => array(),
+        "alto" => array()
     );
 
 
@@ -41,14 +48,30 @@
         array_push($array["venda"],$precoVenda);
         array_push($array["lucro"],$lucro);
 
+        if($lucro < 10){
+            array_push($lucroCont["baixo"],$lucro);
+        }elseif($lucro <= 20){
+            array_push($lucroCont["medio"],$lucro);
+        }else{
+            array_push($lucroCont["alto"],$lucro);
+        }
+
         $aux = readline("Gostaria de Inserir novo produto? (s / n)");
         if($aux == "n"){
             $repete = FALSE;
         }
     }
 
-    echo "O preço total de compra de todos os produtos é ".(array_sum($array["compra"]))."\n";
-    echo "O preço total de venda de todos os produtos é ".(array_sum($array["venda"]))."\n";
-    echo "O preço total de compra de todos os produtos é ".(array_sum($array["venda"]) - array_sum($array["compra"]))."\n";
-    //print_r($array);
+    echo "\n-----------------------------------------------------------------\n";
+    echo "Quantidade de produtos com lucro inferior a 10%\n".count($lucroCont["baixo"])."\n";
+    echo "Quantidade de produtos com lucro entre 10% e 20%\n".count($lucroCont["medio"])."\n";
+    echo "Quantidade de produtos com lucro maior que 20%\n".count($lucroCont["alto"])."\n";
+    echo "-----------------------------------------------------------------\n";
+
+    echo "\n-----------------------------------------------------------------\n";
+    echo "O preço total de compra de todos os produtos é R\$ ".(array_sum($array["compra"]))."\n";
+    echo "O preço total de venda de todos os produtos é R\$ ".(array_sum($array["venda"]))."\n";
+    echo "O preço total de compra de todos os produtos é R\$ ".(array_sum($array["venda"]) - array_sum($array["compra"]))."\n";
+    echo "-----------------------------------------------------------------\n";
+    
 ?>
