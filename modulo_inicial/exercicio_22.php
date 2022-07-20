@@ -57,9 +57,10 @@
         }
 
         $aux = readline("Gostaria de Inserir novo produto? (s / n)");
-        if($aux == "n"){
+        if(strtolower($aux) == "n"){
             $repete = FALSE;
         }
+ 
     }
 
     echo "\n-----------------------------------------------------------------\n";
